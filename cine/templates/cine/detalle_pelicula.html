@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ pelicula.titulo|default:"Detalle Película" }}{% endblock %}
+
+{% block header_title %}Ficha Cinematográfica{% endblock %}
+
+{% block content %}
+{% if pelicula %}
+<div class="card shadow-sm border-0">
+    <div class="row g-0">
+        <div class="col-md-5">
+            <img src="{% static 'img/' %}{{ pelicula.imagen }}" class="img-fluid rounded-start h-100 w-100" alt="{{ pelicula.titulo }}" style="object-fit: cover;">
+        </div>
+        <div class="col-md-7">
+            <div class="card-body p-4">
+                <h2 class="card-title fw-bold text-danger mb-1">{{ pelicula.titulo }}</h2>
+                <p class="text-muted mb-3">Dirigida por: <strong>{{ pelicula.director }}</strong></p>
+                
+                <div class="mb-3">
+                    <span class="badge bg-secondary me-2">{{ pelicula.genero }}</span>
+                    <span class="badge bg-info text-dark me-2">Año: {{ pelicula.anio }}</span>
+                    <span class="badge bg-success">Nota: {{ pelicula.calificacion }}</span>
+                </div>
+
+                <h5>Sinopsis</h5>
+                <p class="card-text">{{ pelicula.sinopsis }}</p>
+
+                <a href="{% url 'cine:cartelera' %}" class="btn btn-secondary mt-3">← Volver a Cartelera</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-warning">No se encontró información sobre la película.</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "titulo": "Lanzamiento de Django 5.0",
+        "categoria": "Desarrollo Web",
+        "fecha": "2026-03-01",
+        "resumen": "Django introduce mejoras significativas en el rendimiento de vistas asíncronas y componentes de plantilla.",
+        "contenido": "La nueva versión de Django trae consigo soporte extendido para campos de bases de datos generados y mejoras en la interfaz de administración...",
+        "destacado": true,
+        "imagen": "noticias/django.jfif"
+    },
+    {
+        "id": 2,
+        "titulo": "El impacto de la Inteligencia Artificial en el Software",
+        "categoria": "Inteligencia Artificial",
+        "fecha": "2026-03-03",
+        "resumen": "Cómo las herramientas de asistencia por IA están transformando los flujos de trabajo de los desarrolladores.",
+        "contenido": "Las herramientas LLM permiten optimizar la escritura de código, generación de pruebas unitarias y maquetado de interfaces...",
+        "destacado": false,
+        "imagen": "noticias/noticias.png"
+    }
+]

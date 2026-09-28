@@ -1,0 +1,24 @@
+[
+    {
+        "id": 101,
+        "titulo": "Inception",
+        "director": "Christopher Nolan",
+        "genero": "Ciencia Ficción",
+        "anio": 2010,
+        "calificacion": 8.8,
+        "sinopsis": "Un ladrón que roba secretos corporativos a través del uso de la tecnología de intercambio de sueños recibe la tarea inversa de plantar una idea en la mente de un CEO.",
+        "estreno": true,
+        "imagen": "cine/inception.jpg"
+    },
+    {
+        "id": 102,
+        "titulo": "Interstellar",
+        "director": "Christopher Nolan",
+        "genero": "Ciencia Ficción",
+        "anio": 2014,
+        "calificacion": 8.6,
+        "sinopsis": "Un grupo de exploradores viaja a través de un agujero de gusano en el espacio en un intento por garantizar la supervivencia de la humanidad.",
+        "estreno": false,
+        "imagen": "cine/cine.png"
+    }
+]

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ noticia.titulo|default:"Detalle de Noticia" }}{% endblock %}
+
+{% block header_title %}Detalle de la Noticia{% endblock %}
+
+{% block content %}
+{% if noticia %}
+<div class="card shadow-sm border-0">
+    <img src="{% static 'img/' %}{{ noticia.imagen }}" class="card-img-top" alt="{{ noticia.titulo }}" style="max-height: 400px; object-fit: cover;">
+    <div class="card-body p-4">
+        <div class="mb-3">
+            <span class="badge bg-primary">{{ noticia.categoria }}</span>
+            <span class="text-muted ms-2">{{ noticia.fecha }}</span>
+        </div>
+        <h2 class="card-title fw-bold mb-3">{{ noticia.titulo }}</h2>
+        <p class="lead">{{ noticia.resumen }}</p>
+        <hr class="my-4">
+        <p class="card-text">{{ noticia.contenido }}</p>
+        
+        <a href="{% url 'noticias:inicio' %}" class="btn btn-secondary mt-3">← Volver a Noticias</a>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-warning">No se encontró información sobre la noticia seleccionada.</div>
+{% endif %}
+{% endblock %}
