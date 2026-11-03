@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block content %}<h1 class="h3">Eliminar registro</h1><p>¿Confirmas que quieres eliminar {{ object }}?</p><form method="post">{% csrf_token %}<button class="btn btn-danger">Confirmar eliminación</button> <a class="btn btn-secondary" href="{{ volver }}">Cancelar</a></form>{% endblock %}

@@ -1,9 +1,12 @@
+from django.contrib.auth.decorators import login_required,permission_required
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, render
 
 from .models import Genero, Pelicula
 
 
+@login_required
+@permission_required('cine.view_pelicula',raise_exception=True)
 def cartelera(request):
     """Listado de películas obtenido mediante consultas del ORM."""
     query = request.GET.get('q', '').strip()
@@ -25,6 +28,8 @@ def cartelera(request):
     return render(request, 'cine/cartelera.html', contexto)
 
 
+@login_required
+@permission_required('cine.view_pelicula',raise_exception=True)
 def detalle_pelicula(request, pk):
     """Ficha de una película específica."""
     pelicula = get_object_or_404(

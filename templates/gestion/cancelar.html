@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block content %}<h2>Cancelar reserva</h2><p>{{ object }}</p><form method="post">{% csrf_token %}<button class="btn btn-danger">Confirmar cancelación</button><a href="{% url 'gestion:reservas' %}" class="btn btn-secondary">Volver</a></form>{% endblock %}

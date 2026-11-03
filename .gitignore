@@ -29,3 +29,12 @@ media/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Copias de secretos y credenciales
+.env.*
+!.env.example
+*.pem
+*.key
+*.sql
+*.sqlite3
+*.sqlite3-*

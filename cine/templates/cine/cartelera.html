@@ -3,16 +3,13 @@
 
 {% block title %}Cine - Cartelera{% endblock %}
 
-{% block header_title %}Cartelera de Cine{% endblock %}
-{% block header_subtitle %}Descubre las mejores películas y estrenos{% endblock %}
-
 {% block content %}
 <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
-    <h2 class="border-bottom pb-2 text-danger mb-0">Películas Disponibles</h2>
+    <h2 class="border-bottom pb-2 text-danger mb-0">Cartelera</h2>
 
     <div class="d-flex gap-2">
         <!-- Botón Agregar (CRUD futuro) -->
-        <a href="#" class="btn btn-success">Agregar</a>
+        {% if perms.cine.add_pelicula %}<a href="{% url 'gestion:crear' 'peliculas' %}" class="btn btn-success">Agregar</a>{% endif %}
 
         <!-- Buscador -->
         <form class="d-flex" method="get" action="{% url 'cine:cartelera' %}">
@@ -47,10 +44,10 @@
                         {% endif %}
                     </div>
                     <div class="d-grid gap-1">
-                        <a href="{% url 'cine:detalle_pelicula' pelicula.pk %}" class="btn btn-outline-danger btn-sm">Ver Ficha Completa</a>
+                        <a href="{% url 'cine:detalle_pelicula' pelicula.pk %}" class="btn btn-outline-danger btn-sm">Ver película</a>
                         <div class="d-flex gap-1">
-                            <a href="#" class="btn btn-outline-warning btn-sm w-50">Modificar</a>
-                            <a href="#" class="btn btn-outline-danger btn-sm w-50">Eliminar</a>
+                            {% if perms.cine.change_pelicula %}<a href="{% url 'gestion:modificar' 'peliculas' pelicula.pk %}" class="btn btn-outline-warning btn-sm w-50">Modificar</a>{% endif %}
+                            {% if perms.cine.delete_pelicula %}<a href="{% url 'gestion:eliminar' 'peliculas' pelicula.pk %}" class="btn btn-outline-danger btn-sm w-50">Eliminar</a>{% endif %}
                         </div>
                     </div>
                 </div>
@@ -59,7 +56,7 @@
     </div>
     {% empty %}
     <div class="col-12">
-        <p class="text-muted">No hay películas registradas en la base de datos.</p>
+        <p class="text-muted">No hay películas disponibles.</p>
     </div>
     {% endfor %}
 </div>

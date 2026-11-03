@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Panel {{ perfil }} | Portal Web{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4"><div><h2>Panel {{ perfil }}</h2></div></div>
+<div class="card shadow-sm mb-4"><div class="card-body"><h3 class="h5">{% if perfil == 'Administrador' %}Administración{% elif perfil == 'Supervisor' %}Operaciones del día{% else %}Accesos de consulta{% endif %}</h3><div class="d-flex flex-wrap gap-2">
+{% if perms.auth.view_user %}<a class="btn btn-dark" href="{% url 'gestion:usuarios' %}">Usuarios y perfiles · {{ total_usuarios }}</a>{% endif %}
+{% if perms.noticias.add_noticia %}<a class="btn btn-primary" href="{% url 'gestion:crear' 'noticias' %}">Crear noticia</a>{% endif %}
+{% if perms.cine.add_pelicula %}<a class="btn btn-danger" href="{% url 'gestion:crear' 'peliculas' %}">Agregar película</a>{% endif %}
+{% if perms.gestion.add_funcion %}<a class="btn btn-outline-primary" href="{% url 'gestion:crear' 'funciones' %}">Programar función</a>{% endif %}
+<a class="btn btn-outline-primary" href="{% url 'noticias:inicio' %}">Leer noticias</a><a class="btn btn-outline-danger" href="{% url 'cine:cartelera' %}">Ver cartelera</a>
+{% if perms.gestion.add_reserva %}<a class="btn btn-success" href="{% url 'gestion:reservar' %}">Reservar entradas</a>{% endif %}
+</div></div></div>
+{% if perfil != 'Administrativo' %}<h3 class="h5">Resumen</h3><div class="row g-3 mb-4">{% for nombre,url,total in modulos %}<div class="col-md-4"><div class="card h-100 shadow-sm"><div class="card-body"><h4 class="h6 text-muted">{{ nombre }}</h4><p class="display-6">{{ total }}</p><a href="{{ url }}" class="btn btn-outline-secondary btn-sm">{% if perfil == 'Administrador' %}Administrar{% else %}Gestionar{% endif %} {{ nombre|lower }}</a></div></div></div>{% endfor %}</div>{% endif %}
+<div class="row g-4"><section class="col-lg-6"><div class="card h-100"><div class="card-body"><h3 class="h5">Próximas funciones</h3>{% for funcion in funciones_proximas %}<div class="border-bottom py-2"><strong>{{ funcion.pelicula.titulo }}</strong><div class="text-muted">{{ funcion.fecha|date:'d/m/Y H:i' }} · Capacidad: {{ funcion.cupos }}</div></div>{% empty %}<p class="text-muted">No hay funciones programadas.</p>{% endfor %}</div></div></section><section class="col-lg-6"><div class="card h-100"><div class="card-body"><h3 class="h5">{% if perfil == 'Administrativo' %}Mis reservas recientes{% else %}Reservas recientes{% endif %}</h3>{% for reserva in reservas_recientes %}<div class="border-bottom py-2"><strong>#{{ reserva.pk }} · {{ reserva.funcion.pelicula.titulo }}</strong><div>{{ reserva.cantidad }} entradas · {{ reserva.cancelada|yesno:'Cancelada,Vigente' }}</div></div>{% empty %}<p class="text-muted">No hay reservas registradas.</p>{% endfor %}{% if perms.gestion.view_reserva %}<a class="btn btn-link px-0" href="{% url 'gestion:reservas' %}">Abrir reservas</a>{% endif %}</div></div></section></div>
+{% endblock %}

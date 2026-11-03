@@ -3,18 +3,13 @@
 
 {% block title %}Noticias - Inicio{% endblock %}
 
-{% block header_title %}Sección de Noticias Tecnológicas{% endblock %}
-{% block header_subtitle %}Mantente al día con lo último en desarrollo y tecnología{% endblock %}
-
 {% block content %}
 <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
-    <h2 class="border-bottom pb-2 text-primary mb-0">Últimas Publicaciones</h2>
+    <h2 class="border-bottom pb-2 text-primary mb-0">Noticias</h2>
 
     <div class="d-flex gap-2">
         <!-- Botón Agregar (CRUD futuro) -->
-        <a href="#" class="btn btn-success">
-            <i class="bi bi-plus-lg"></i> Agregar
-        </a>
+        {% if perms.noticias.add_noticia %}<a href="{% url 'gestion:crear' 'noticias' %}" class="btn btn-success">Agregar</a>{% endif %}
 
         <!-- Buscador -->
         <form class="d-flex" method="get" action="{% url 'noticias:inicio' %}">
@@ -58,14 +53,14 @@
                     </td>
                     <td class="text-end">
                         <a href="{% url 'noticias:detalle' noticia.pk %}" class="btn btn-sm btn-outline-secondary">Ver</a>
-                        <a href="#" class="btn btn-sm btn-outline-warning">Modificar</a>
-                        <a href="#" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                        {% if perms.noticias.change_noticia %}<a href="{% url 'gestion:modificar' 'noticias' noticia.pk %}" class="btn btn-sm btn-outline-warning">Modificar</a>{% endif %}
+                        {% if perms.noticias.delete_noticia %}<a href="{% url 'gestion:eliminar' 'noticias' noticia.pk %}" class="btn btn-sm btn-outline-danger">Eliminar</a>{% endif %}
                     </td>
                 </tr>
                 {% empty %}
                 <tr>
                     <td colspan="6" class="text-center text-muted py-4">
-                        No hay noticias registradas en la base de datos.
+                        No hay noticias publicadas.
                     </td>
                 </tr>
                 {% endfor %}

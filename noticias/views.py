@@ -1,9 +1,12 @@
+from django.contrib.auth.decorators import login_required,permission_required
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, render
 
 from .models import Categoria, Noticia
 
 
+@login_required
+@permission_required('noticias.view_noticia',raise_exception=True)
 def inicio(request):
     """Listado de noticias obtenido mediante consultas del ORM."""
     query = request.GET.get('q', '').strip()
@@ -25,6 +28,8 @@ def inicio(request):
     return render(request, 'noticias/inicio.html', contexto)
 
 
+@login_required
+@permission_required('noticias.view_noticia',raise_exception=True)
 def detalle(request, pk):
     """Ficha de una noticia específica."""
     noticia = get_object_or_404(
